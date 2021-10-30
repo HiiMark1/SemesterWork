@@ -2,9 +2,33 @@ package com.example.demo.model;
 
 public class Comment {
       int id;
-      String AuthMail;
+      int userId;
       long date;
-      int rating;
+      String text;
+      int postId;
+
+      public Comment(int id, int userId, long date, String text, int postId) {
+            this.id = id;
+            this.userId = userId;
+            this.date = date;
+            this.text = text;
+            this.postId = postId;
+      }
+
+      public int getPostId() {
+            return postId;
+      }
+
+      public void setPostId(int postId) {
+            this.postId = postId;
+      }
+
+      public Comment(int userId, long date, String text, int postId) {
+            this.userId = userId;
+            this.date = date;
+            this.text = text;
+            this.postId = postId;
+      }
 
       public int getId() {
             return id;
@@ -14,12 +38,12 @@ public class Comment {
             this.id = id;
       }
 
-      public String getAuthMail() {
-            return AuthMail;
+      public int getUserId() {
+            return userId;
       }
 
-      public void setAuthMail(String authMail) {
-            AuthMail = authMail;
+      public void setUserId(int userId) {
+            this.userId = userId;
       }
 
       public long getDate() {
@@ -30,18 +54,11 @@ public class Comment {
             this.date = date;
       }
 
-      public int getRating() {
-            return rating;
+      public String getText() {
+            return text;
       }
 
-      public void setRating(int rating) {
-            this.rating = rating;
-      }
-
-      public Comment(int id, String authMail, long date, int rating) {
-            this.id = id;
-            AuthMail = authMail;
-            this.date = date;
-            this.rating = rating;
+      public void setText(String text) {
+            this.text = text;
       }
 }

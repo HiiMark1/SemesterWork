@@ -9,15 +9,16 @@ public class User {
       private String status;
       private String login;
       private String password;
+      private String imageUri;
 
-      public User(int id, String login, String mail, String password){
-            this.id = id;
+      public User(int age, String login, String mail, String password) {
             this.login = login;
             this.mail = mail;
             this.password = password;
+            this.age = age;
       }
 
-      public User(int id, String login, String mail, String password, String name, String surname, String status, int age){
+      public User(int id, String login, String mail, String password, String name, String surname, String status, int age, String imageUri) {
             this.id = id;
             this.name = name;
             this.surname = surname;
@@ -26,6 +27,7 @@ public class User {
             this.mail = mail;
             this.login = login;
             this.password = password;
+            this.imageUri = imageUri;
       }
 
       public int getId() {
@@ -90,5 +92,13 @@ public class User {
 
       public void setPassword(String password) {
             this.password = password;
+      }
+
+      public String getImageUri() {
+            return imageUri;
+      }
+
+      public void setImageUri(String imageUri) {
+            this.imageUri = imageUri;
       }
 }

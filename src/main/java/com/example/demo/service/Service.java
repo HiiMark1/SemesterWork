@@ -2,10 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.model.User;
 
-public interface UserService {
-      User get(String login);
+import java.util.List;
 
-      User get(int id);
+public interface Service<T> {
+      T get(String login);
 
-      void save(User user);
+      T get(int id);
+
+      List<T> getAll();
+
+      void save(T t);
 }

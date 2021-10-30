@@ -4,17 +4,31 @@ import java.util.List;
 
 public class Post {
       int id;
-      String AuthMail;
+      int userId;
       long date;
       int rating;
-      List<String> pics;
+      String text;
+      String picUrl;
+      String name;
 
-      public Post(int id, String authMail, long date, int rating, List<String> pics) {
+      public Post(int id, int userId, long date, int rating, String text, String picUrl, String name) {
             this.id = id;
-            AuthMail = authMail;
+            this.userId = userId;
             this.date = date;
             this.rating = rating;
-            this.pics = pics;
+            this.text = text;
+            this.picUrl = picUrl;
+            this.name = name;
+      }
+
+      public Post(int userId, long date, int rating, String text, String picUrl, String name) {
+            this.id = id;
+            this.userId = userId;
+            this.date = date;
+            this.rating = rating;
+            this.text = text;
+            this.picUrl = picUrl;
+            this.name = name;
       }
 
       public int getId() {
@@ -23,14 +37,6 @@ public class Post {
 
       public void setId(int id) {
             this.id = id;
-      }
-
-      public String getAuthMail() {
-            return AuthMail;
-      }
-
-      public void setAuthMail(String authMail) {
-            AuthMail = authMail;
       }
 
       public long getDate() {
@@ -49,11 +55,35 @@ public class Post {
             this.rating = rating;
       }
 
-      public List<String> getPics() {
-            return pics;
+      public String getPicUrl() {
+            return picUrl;
       }
 
-      public void setPics(List<String> pics) {
-            this.pics = pics;
+      public void setPicUrl(String picUrl) {
+            this.picUrl = picUrl;
+      }
+
+      public int getUserId() {
+            return userId;
+      }
+
+      public void setUserId(int userId) {
+            this.userId = userId;
+      }
+
+      public String getText() {
+            return text;
+      }
+
+      public void setText(String text) {
+            this.text = text;
+      }
+
+      public String getName() {
+            return name;
+      }
+
+      public void setName(String name) {
+            this.name = name;
       }
 }

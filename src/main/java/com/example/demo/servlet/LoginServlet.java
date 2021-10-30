@@ -1,5 +1,9 @@
 package com.example.demo.servlet;
 
+import com.example.demo.helper.PasswordHelper;
+import com.example.demo.model.User;
+import com.example.demo.service.Impl.UserServiceImpl;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -7,8 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "loginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
-      public static final String LOGIN = "login";
-      public static final String PASSWORD = "password";
+      UserServiceImpl userService = new UserServiceImpl();
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -19,14 +22,23 @@ public class LoginServlet extends HttpServlet {
       protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
             String login = req.getParameter("login");
             String password = req.getParameter("pass");
-            if (LOGIN.equals(login) && PASSWORD.equals(password)) {
+            if(login == null || password == null){
+                  resp.sendRedirect("/login");
+            }
+            User user = userService.get(login);
+            if(user == null){
+                  resp.sendRedirect("/login");
+            }
+            if (user.getPassword().equals(PasswordHelper.encrypt(password))) {
                   HttpSession session = req.getSession();
-                  session.setAttribute("username", login);
+                  session.setAttribute("login", login);
                   session.setMaxInactiveInterval(2*60*60);
 
-                  Cookie userCookie = new Cookie("username", login);
-                  userCookie.setMaxAge(7*24*60*60);
-                  resp.addCookie(userCookie);
+                  if(req.getParameter("remember")!=null && req.getParameter("remember").equals("")){
+                        Cookie userCookie = new Cookie("login", login);
+                        userCookie.setMaxAge(7*24*60*60);
+                        resp.addCookie(userCookie);
+                  }
 
                   resp.sendRedirect("/profile");
             } else {

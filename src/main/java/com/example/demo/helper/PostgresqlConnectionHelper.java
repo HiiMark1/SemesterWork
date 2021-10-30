@@ -13,7 +13,7 @@ public class PostgresqlConnectionHelper {
 
       private static Connection connection;
       private static final String DRIVER = "org.postgresql.Driver";
-      public static final String URL = "jdbc:postgresql://localhost:5432/forum";
+      public static final String URL = "jdbc:postgresql://localhost:5432/news";
       public static final String USER = "postgres";
       public static final String PASSWORD = "postgresql";
 
