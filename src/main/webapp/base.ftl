@@ -1,10 +1,10 @@
 <#ftl encoding='UTF-8'>
 <html lang="ru">
-<head>
+<head style="margin: 130px">
     <title><@title></@title></title>
 </head>
 
-<body>
+<body style="margin: 105px">
 <div id="header">
     <H3><@header></@header></H3>
 </div>

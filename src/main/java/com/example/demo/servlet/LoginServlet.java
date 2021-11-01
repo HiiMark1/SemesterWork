@@ -15,6 +15,7 @@ public class LoginServlet extends HttpServlet {
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
             resp.sendRedirect("login.html");
       }
 
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                   session.setAttribute("login", login);
                   session.setMaxInactiveInterval(2*60*60);
 
-                  if(req.getParameter("remember")!=null && req.getParameter("remember").equals("")){
+                  if((req.getParameter("remember").equals("rem"))){
                         Cookie userCookie = new Cookie("login", login);
                         userCookie.setMaxAge(7*24*60*60);
                         resp.addCookie(userCookie);

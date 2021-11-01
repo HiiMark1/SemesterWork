@@ -29,7 +29,7 @@ public class CommentServiceImpl implements Service<Comment> {
             commentDao.save(comment);
       }
 
-      public List<Comment> getLastTenPosts(){
-            return commentDao.getLastTenComments();
+      public List<Comment> getPostComments(int id){
+            return commentDao.getPostComments(id);
       }
 }

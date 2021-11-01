@@ -23,7 +23,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
             try {
                   String sqlRequest = "SELECT * FROM posts WHERE id = ?;";
                   PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest);
-                  preparedStatement.setString(1, String.valueOf(id));
+                  preparedStatement.setInt(1, id);
                   ResultSet resultSet = preparedStatement.executeQuery();
                   if (resultSet == null) {
                         return null;

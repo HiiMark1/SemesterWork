@@ -24,7 +24,7 @@ public class UserDaoImpl implements DaoInterface<User> {
 
             try {
                   PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest);
-                  preparedStatement.setString(1, String.valueOf(id));
+                  preparedStatement.setInt(1, id);
                   ResultSet resultSet = preparedStatement.executeQuery();
                   if (resultSet == null) {
                         return null;

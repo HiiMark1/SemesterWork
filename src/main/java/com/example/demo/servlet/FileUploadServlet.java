@@ -33,6 +33,11 @@ public class FileUploadServlet extends HttpServlet{
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            HttpSession httpSession = req.getSession();
+            String login = (String) httpSession.getAttribute("login");
+            if (login != null) {
+                  req.setAttribute("login", login);
+            }
             req.getRequestDispatcher("upload.ftl").forward(req, resp);
       }
 

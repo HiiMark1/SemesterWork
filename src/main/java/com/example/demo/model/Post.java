@@ -7,8 +7,10 @@ public class Post {
       int userId;
       long date;
       int rating;
+      //500
       String text;
       String picUrl;
+      //30
       String name;
 
       public Post(int id, int userId, long date, int rating, String text, String picUrl, String name) {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
+<head style="margin: 130px">
   <meta charset="UTF-8">
   <title>Окно регистрации</title>
 </head>
-<body>
+<body style="margin: 105px">
 <form action="/reg" method="post">
   Придумайте себе логин:
   <input name="login" type="text"/>
@@ -23,5 +23,19 @@
   <br>
   <input type="submit" value="Регистрация">
 </form>
+<div class="dropdown" style="position: absolute; top: 30px; left: 60px">
+  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Меню
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="/news">Новости</a> </li>
+    <li><a href="/settings">Редактировать профиль</a> </li>
+    <li><a href="/upload">Загрузить новое фото профиля</a> </li>
+    <li><a href="/report">Репорт</a></li>
+    <li class="divider"></li>
+    <li><a href="/login">Войти</a></li>
+    <li><a href="/reg">Регистрация</a></li>
+  </ul>
+</div>
 </body>
 </html>

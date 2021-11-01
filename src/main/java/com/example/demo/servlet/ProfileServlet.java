@@ -31,13 +31,17 @@ public class ProfileServlet extends HttpServlet {
                         HttpSession session = req.getSession();
                         session.setAttribute("login", l);
                         session.setMaxInactiveInterval(2 * 60 * 60);
+                        User user = userService.get(login);
+                        req.setAttribute("user", user);
+                        req.getRequestDispatcher("profile.ftl").forward(req, resp);
                   } else {
                         resp.sendRedirect("/login");
                   }
+            } else {
+                  User user = userService.get(login);
+                  req.setAttribute("user", user);
+                  req.getRequestDispatcher("profile.ftl").forward(req, resp);
             }
-            User user = userService.get(login);
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("profile.ftl").forward(req, resp);
       }
 
       @Override

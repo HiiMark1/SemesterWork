@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/profile", "/upload", "/settings", "/new_post"})
+@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/profile", "/upload", "/settings", "/new_post", "/edit_post"})
 public class AuthenticationFilter implements Filter {
       @Override
       public void init(FilterConfig filterConfig) {

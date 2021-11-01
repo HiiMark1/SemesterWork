@@ -23,7 +23,7 @@ public class CommentDaoImpl implements DaoInterface<Comment> {
             try {
                   String sqlRequest = "SELECT * FROM comments WHERE id = ?;";
                   PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest);
-                  preparedStatement.setString(1, String.valueOf(id));
+                  preparedStatement.setInt(1, id);
                   ResultSet resultSet = preparedStatement.executeQuery();
                   if (resultSet == null) {
                         return null;
@@ -92,12 +92,13 @@ public class CommentDaoImpl implements DaoInterface<Comment> {
             }
       }
 
-      public List<Comment> getLastTenComments(){
+      public List<Comment> getPostComments(int post_id){
             List<Comment> comments = new ArrayList<>();
             try {
-                  String str = "SELECT * FROM comments ORDER BY id DESC LIMIT 10";
+                  String str = "SELECT * FROM comments ORDER BY id DESC WHERE postId=?";
                   Comment comment;
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
+                  preparedStatement.setInt(1, post_id);
                   ResultSet resultSet = preparedStatement.executeQuery();
                   if (resultSet == null) {
                         return null;

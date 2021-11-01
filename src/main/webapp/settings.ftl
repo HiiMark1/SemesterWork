@@ -3,7 +3,6 @@
 <#include "base.ftl">
 <#macro title>Настройки</#macro>
 <#macro header>Редактирование профиля</#macro>
-
 <#macro content>
     <form action="/settings" method="post">
         Имя:

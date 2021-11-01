@@ -1,34 +1,26 @@
 package com.example.demo.model;
 
-public class Comment {
+public class Report {
       int id;
       int userId;
       long date;
-      //500
+      //600
       String text;
-      int postId;
+      boolean isTech;
 
-      public Comment(int id, int userId, long date, String text, int postId) {
+      public Report(int id, int userId, long date, String text, boolean isTech) {
             this.id = id;
             this.userId = userId;
             this.date = date;
             this.text = text;
-            this.postId = postId;
+            this.isTech = isTech;
       }
 
-      public int getPostId() {
-            return postId;
-      }
-
-      public void setPostId(int postId) {
-            this.postId = postId;
-      }
-
-      public Comment(int userId, long date, String text, int postId) {
+      public Report(int userId, long date, String text, boolean isTech) {
             this.userId = userId;
             this.date = date;
             this.text = text;
-            this.postId = postId;
+            this.isTech = isTech;
       }
 
       public int getId() {
@@ -61,5 +53,13 @@ public class Comment {
 
       public void setText(String text) {
             this.text = text;
+      }
+
+      public boolean isTech() {
+            return isTech;
+      }
+
+      public void setTech(boolean tech) {
+            isTech = tech;
       }
 }
