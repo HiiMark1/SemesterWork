@@ -15,32 +15,65 @@ public class ProfileServlet extends HttpServlet {
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            HttpSession httpSession = req.getSession();
-            String login = (String) httpSession.getAttribute("login");
-            if (login == null) {
-                  String l = null;
-                  Cookie[] cookies = req.getCookies();
-                  for (Cookie cookie : cookies) {
-                        if (cookie.getName().equals("login")) {
-                              l = cookie.getValue();
-                              break;
+            if (req.getParameter("id")!=null){
+                  User u = userService.get(Integer.parseInt(req.getParameter("id")));
+                  HttpSession httpSession = req.getSession();
+                  String login = (String) httpSession.getAttribute("login");
+                  if (login == null && req.getCookies()!=null) {
+                        String l = null;
+                        Cookie[] cookies = req.getCookies();
+                        for (Cookie cookie : cookies) {
+                              if (cookie.getName().equals("login")) {
+                                    l = cookie.getValue();
+                                    break;
+                              }
                         }
+                        if (l != null) {
+                              login = l;
+                              HttpSession session = req.getSession();
+                              session.setAttribute("login", l);
+                              session.setMaxInactiveInterval(2 * 60 * 60);
+                              User user = userService.get(login);
+                              req.setAttribute("u", u);
+                              req.setAttribute("user", user);
+                              req.getRequestDispatcher("profile.ftl").forward(req, resp);
+                        } else {
+                              resp.sendRedirect("/login");
+                        }
+                  } else {
+                        User user = userService.get(login);
+                        req.setAttribute("u", u);
+                        req.setAttribute("user", user);
+                        req.getRequestDispatcher("profile.ftl").forward(req, resp);
                   }
-                  if (l != null) {
-                        login = l;
-                        HttpSession session = req.getSession();
-                        session.setAttribute("login", l);
-                        session.setMaxInactiveInterval(2 * 60 * 60);
+            } else {
+                  HttpSession httpSession = req.getSession();
+                  String login = (String) httpSession.getAttribute("login");
+                  if (login == null && req.getCookies()!=null) {
+                        String l = null;
+                        Cookie[] cookies = req.getCookies();
+                        for (Cookie cookie : cookies) {
+                              if (cookie.getName().equals("login")) {
+                                    l = cookie.getValue();
+                                    break;
+                              }
+                        }
+                        if (l != null) {
+                              login = l;
+                              HttpSession session = req.getSession();
+                              session.setAttribute("login", l);
+                              session.setMaxInactiveInterval(2 * 60 * 60);
+                              User user = userService.get(login);
+                              req.setAttribute("user", user);
+                              req.getRequestDispatcher("profile.ftl").forward(req, resp);
+                        } else {
+                              resp.sendRedirect("/login");
+                        }
+                  } else {
                         User user = userService.get(login);
                         req.setAttribute("user", user);
                         req.getRequestDispatcher("profile.ftl").forward(req, resp);
-                  } else {
-                        resp.sendRedirect("/login");
                   }
-            } else {
-                  User user = userService.get(login);
-                  req.setAttribute("user", user);
-                  req.getRequestDispatcher("profile.ftl").forward(req, resp);
             }
       }
 

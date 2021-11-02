@@ -38,6 +38,7 @@
     if (user!=null){
           out.print("<li><a href=\"/profile\">Профиль</a></li>");
     }
+    out.print("<li><a href=\"/search\">Поиск</a> </li>");
     out.print("<li class=\"diviner\"></li>");
     if(user==null){
         out.print("<li><a href=\"/login\">Логин</a></li>");

@@ -50,21 +50,25 @@ public class FileUploadServlet extends HttpServlet{
             }
 
             Part part = req.getPart("file");
-            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-            InputStream content = part.getInputStream();
-            int partNumber = Math.abs(fileName.hashCode() % DIRECTORIES_COUNT);
-            File file = new File(FILE_PATH_PREFIX + File.separator + partNumber + File.separator + fileName);
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            FileOutputStream outputStream = new FileOutputStream(file);
-            byte[] buffer = new byte[content.available()];
-            content.read(buffer);
-            outputStream.write(buffer);
+            if(part!=null){
+                  String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                  InputStream content = part.getInputStream();
+                  int partNumber = Math.abs(fileName.hashCode() % DIRECTORIES_COUNT);
+                  File file = new File(FILE_PATH_PREFIX + File.separator + partNumber + File.separator + fileName);
+                  file.getParentFile().mkdirs();
+                  file.createNewFile();
+                  FileOutputStream outputStream = new FileOutputStream(file);
+                  byte[] buffer = new byte[content.available()];
+                  content.read(buffer);
+                  outputStream.write(buffer);
 
-            long t = new Date().getTime();
-            cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", String.valueOf(t)));
-            userService.changeImage(userService.get(login), cloudinary.url().transformation(new Transformation().width(350)
-                    .height(467)).imageTag(String.valueOf(t)));
-            resp.sendRedirect("/profile");
+                  long t = new Date().getTime();
+                  cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", String.valueOf(t)));
+                  userService.changeImage(userService.get(login), cloudinary.url().transformation(new Transformation().width(350)
+                          .height(467)).imageTag(String.valueOf(t)));
+                  resp.sendRedirect("/profile");
+            } else {
+                  resp.sendRedirect("/upload");
+            }
       }
 }

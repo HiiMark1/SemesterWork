@@ -4,7 +4,7 @@ public class Report {
       int id;
       int userId;
       long date;
-      //600
+      //2000
       String text;
       boolean isTech;
 

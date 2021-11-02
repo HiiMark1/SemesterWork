@@ -1,34 +1,19 @@
-package com.example.demo.model;
+package com.example.demo.modelDTO;
 
-public class Comment {
-      int id;
-      int userId;
-      long date;
-      //1000
-      String text;
-      int postId;
+public class ReportDTO {
+      private int id;
+      private int userId;
+      private long date;
+      //600
+      private String text;
+      private boolean isTech;
 
-      public Comment(int id, int userId, long date, String text, int postId) {
+      public ReportDTO(int id, int userId, long date, String text, boolean isTech) {
             this.id = id;
             this.userId = userId;
             this.date = date;
             this.text = text;
-            this.postId = postId;
-      }
-
-      public int getPostId() {
-            return postId;
-      }
-
-      public void setPostId(int postId) {
-            this.postId = postId;
-      }
-
-      public Comment(int userId, long date, String text, int postId) {
-            this.userId = userId;
-            this.date = date;
-            this.text = text;
-            this.postId = postId;
+            this.isTech = isTech;
       }
 
       public int getId() {
@@ -61,5 +46,13 @@ public class Comment {
 
       public void setText(String text) {
             this.text = text;
+      }
+
+      public boolean isTech() {
+            return isTech;
+      }
+
+      public void setTech(boolean tech) {
+            isTech = tech;
       }
 }

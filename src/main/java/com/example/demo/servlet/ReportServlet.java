@@ -1,8 +1,10 @@
 package com.example.demo.servlet;
 
 import com.example.demo.model.Post;
+import com.example.demo.model.Report;
 import com.example.demo.model.User;
 import com.example.demo.service.Impl.PostServiceImpl;
+import com.example.demo.service.Impl.ReportServiceImpl;
 import com.example.demo.service.Impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -11,11 +13,11 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet(name = "newPostServlet", urlPatterns = "/new_post")
-public class NewPostServlet extends HttpServlet {
+@WebServlet(name = "reportServlet", urlPatterns = "/report")
+public class ReportServlet extends HttpServlet {
       User user;
-      PostServiceImpl postService = new PostServiceImpl();
       UserServiceImpl userService = new UserServiceImpl();
+      ReportServiceImpl reportService = new ReportServiceImpl();
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,27 +38,31 @@ public class NewPostServlet extends HttpServlet {
                         session.setAttribute("login", l);
                         session.setMaxInactiveInterval(2 * 60 * 60);
                         user = userService.get(login);
-                        req.getRequestDispatcher("newPost.html").forward(req, resp);
+                        req.getRequestDispatcher("report.html").forward(req, resp);
                   } else {
                         resp.sendRedirect("/login");
                   }
             } else {
                   user = userService.get(login);
-                  req.getRequestDispatcher("newPost.html").forward(req, resp);
+                  req.getRequestDispatcher("report.html").forward(req, resp);
             }
       }
 
       @Override
-      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            if (req.getParameter("name") != null && !req.getParameter("text").equals("")
-                    && !req.getParameter("name").equals("") && req.getParameter("text") != null) {
+      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            if (req.getParameter("text") != null && !req.getParameter("text").equals("")){
+                  boolean isTech = false;
                   String text = req.getParameter("text");
-                  String name = req.getParameter("name");
-                  Post post = new Post(user.getId(), new Date().getTime(), 0, text, "", name);
-                  postService.save(post);
+                  if (req.getParameter("isTech")!=null){
+                        if((req.getParameter("isTech").equals("isTech"))){
+                              isTech = true;
+                        }
+                  }
+                  Report report = new Report(user.getId(), new Date().getTime(), text, isTech);
+                  reportService.save(report);
                   resp.sendRedirect("/news");
             } else {
-                  resp.sendRedirect("/new_post");
+                  resp.sendRedirect("/report");
             }
       }
 }

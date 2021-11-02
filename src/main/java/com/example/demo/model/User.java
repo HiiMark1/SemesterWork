@@ -6,6 +6,7 @@ public class User {
       private String name;
       private String surname;
       private String mail;
+      //700
       private String status;
       private String login;
       private String password;

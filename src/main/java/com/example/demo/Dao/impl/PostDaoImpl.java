@@ -54,7 +54,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
       public List<Post> getAll() {
             try {
                   Statement statement = connection.createStatement();
-                  String sql = "SELECT * FROM posts";
+                  String sql = "SELECT * FROM posts;";
                   ResultSet resultSet = statement.executeQuery(sql);
 
                   List<Post> posts = new ArrayList<>();
@@ -112,7 +112,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
 
       public void changeText(Post post, String text) {
             try {
-                  String str = "UPDATE users SET text = ? WHERE id = ?;";
+                  String str = "UPDATE posts SET text = ? WHERE id = ?;";
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
                   preparedStatement.setString(1, text);
                   preparedStatement.setInt(2, post.getId());
@@ -124,7 +124,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
 
       public void changePicUrl(Post post, String picUrl) {
             try {
-                  String str = "UPDATE users SET picUrl = ? WHERE id = ?;";
+                  String str = "UPDATE posts SET picUrl = ? WHERE id = ?;";
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
                   preparedStatement.setString(1, picUrl);
                   preparedStatement.setInt(2, post.getId());
@@ -136,7 +136,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
 
       public void changeName(Post post, String name) {
             try {
-                  String str = "UPDATE users SET name = ? WHERE id = ?;";
+                  String str = "UPDATE posts SET name = ? WHERE id = ?;";
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
                   preparedStatement.setString(1, name);
                   preparedStatement.setInt(2, post.getId());
@@ -149,7 +149,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
       public List<Post> getLastTenPosts(){
             List<Post> posts = new ArrayList<>();
             try {
-                  String str = "SELECT * FROM posts ORDER BY id DESC LIMIT 10";
+                  String str = "SELECT * FROM posts ORDER BY id DESC LIMIT 10;";
                   Post post;
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
                   ResultSet resultSet = preparedStatement.executeQuery();

@@ -33,7 +33,7 @@ public class CommentDaoImpl implements DaoInterface<Comment> {
                         long date = resultSet.getLong("date");
                         String text = resultSet.getString("text");
                         int postId = resultSet.getInt("postId");
-                        comment = new Comment(userId, date, text, postId);
+                        comment = new Comment(id, userId, date, text, postId);
                   }
 
             } catch (SQLException throwables) {
@@ -95,7 +95,7 @@ public class CommentDaoImpl implements DaoInterface<Comment> {
       public List<Comment> getPostComments(int post_id){
             List<Comment> comments = new ArrayList<>();
             try {
-                  String str = "SELECT * FROM comments ORDER BY id DESC WHERE postId=?";
+                  String str = "SELECT * FROM comments WHERE postId=? ORDER BY id DESC;";
                   Comment comment;
                   PreparedStatement preparedStatement = connection.prepareStatement(str);
                   preparedStatement.setInt(1, post_id);
@@ -109,7 +109,8 @@ public class CommentDaoImpl implements DaoInterface<Comment> {
                         long date = resultSet.getLong("date");
                         String text = resultSet.getString("text");
                         int postId = resultSet.getInt("postId");
-                        comments.add(new Comment(id, userId, date, text, postId));
+                        comment = new Comment(id, userId, date, text, postId);
+                        comments.add(comment);
                   }
             } catch (SQLException throwables) {
                   LOGGER.warn("Failed to get 10 old comments");

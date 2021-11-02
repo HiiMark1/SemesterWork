@@ -24,14 +24,14 @@
             ${user.age}
         </#if>
         <br>
-        <input name="age" type="text">
+        <input name="age" type="text" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">
         <br>
         Статус:
         <#if (user.status)??>
             ${user.status}
         </#if>
         <br>
-        <input name="status" type="text">
+        <input name="status" type="text" style="width: auto;">
         <br>
         <br>
         Для смены пароля введите старый и новый пароли

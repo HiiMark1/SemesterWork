@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/profile", "/upload", "/settings", "/new_post", "/edit_post"})
+@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/profile", "/upload", "/settings", "/new_post", "/edit_post", "/report"})
 public class AuthenticationFilter implements Filter {
       @Override
       public void init(FilterConfig filterConfig) {
@@ -16,25 +16,29 @@ public class AuthenticationFilter implements Filter {
               throws IOException, ServletException {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-            Cookie[] cookies = request.getCookies();
-            boolean flag = false;
-            if(cookies!=null){
-                  for(Cookie cookie: cookies){
-                        if(cookie.getName().equals("login")){
-                              flag = true;
-                              break;
-                        }
-                  }
-            }
-
             String uri = request.getRequestURI();
             HttpSession session = request.getSession(false);
+
+            Cookie[] cookies = request.getCookies();
+            String login = null;
             if (session == null && !uri.contains("login")) {
-                  if(flag){
-                        filterChain.doFilter(servletRequest, servletResponse);
-                  } else{
+                  if (cookies == null) {
                         response.sendRedirect("/login");
+                  } else {
+                        for (Cookie cookie : cookies) {
+                              if (cookie.getName().equals("login")) {
+                                    login = cookie.getValue();
+                                    break;
+                              }
+                        }
+                        if (login != null) {
+                              session = request.getSession();
+                              session.setAttribute("login", login);
+                              session.setMaxInactiveInterval(2 * 60 * 60);
+                              filterChain.doFilter(servletRequest, servletResponse);
+                        } else {
+                              response.sendRedirect("/login");
+                        }
                   }
             } else {
                   filterChain.doFilter(servletRequest, servletResponse);

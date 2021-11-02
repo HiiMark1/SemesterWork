@@ -1,5 +1,6 @@
 package com.example.demo.servlet;
 
+import com.example.demo.helper.PasswordHelper;
 import com.example.demo.model.User;
 import com.example.demo.service.Impl.UserServiceImpl;
 import com.example.demo.service.Service;
@@ -24,7 +25,9 @@ public class RegServlet extends HttpServlet {
       protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
             if(req.getParameter("age").equals("") || req.getParameter("age") == null || req.getParameter("login") == null ||
                     req.getParameter("mail") == null || req.getParameter("pass") == null ||
-                    req.getParameter("pass2") == null){
+                    req.getParameter("pass2") == null || req.getParameter("login").equals("") ||
+                    req.getParameter("mail").equals("") || req.getParameter("pass").equals("") ||
+                    req.getParameter("pass2").equals("")){
                   resp.sendRedirect("/reg");
             } else {
                   String login = req.getParameter("login");
@@ -32,7 +35,7 @@ public class RegServlet extends HttpServlet {
                   String password = req.getParameter("pass");
                   String confirmedPassword = req.getParameter("pass2");
                   int age = Integer.parseInt(req.getParameter("age"));
-                  if (userService.get(login) == null && password.equals(confirmedPassword) && mail != null && age > 18 && login != null) {
+                  if (login != null && userService.get(login) == null && password.equals(confirmedPassword) && mail != null && age > 18) {
                         User user = new User(age, login, mail, password);
                         userService.save(user);
                         resp.sendRedirect("/login");

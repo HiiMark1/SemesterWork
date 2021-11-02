@@ -81,7 +81,7 @@ public class UserDaoImpl implements DaoInterface<User> {
       public List<User> getAll() {
             try {
                   Statement statement = connection.createStatement();
-                  String sql = "SELECT * FROM users";
+                  String sql = "SELECT * FROM users;";
                   ResultSet resultSet = statement.executeQuery(sql);
 
                   List<User> users = new ArrayList<>();
@@ -110,7 +110,7 @@ public class UserDaoImpl implements DaoInterface<User> {
 
       @Override
       public void save(User user) {
-            String sql = "INSERT INTO users (login, mail, name, surname, status, password, age) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO users(login, mail, name, surname, status, password, age) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
             try {
                   PreparedStatement preparedStatement = connection.prepareStatement(sql);

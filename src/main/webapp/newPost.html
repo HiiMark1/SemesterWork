@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:jsp="http://java.sun.com/jsf/html">
 <head style="margin: 130px">
     <meta charset="UTF-8">
     <title>Новый пост</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body style="margin: 105px">
 <form action="/new_post" method="post">
     Название поста:
-    <input name="name" type="text"/>
+    <input name="name" type="text" maxlength="30"/>
     <br>
     <script type="text/javascript">
         function countChar() {
@@ -33,8 +27,8 @@
     </script>
     <div id="count_char_block">
             <textarea name="text" id="count_char_textarea" style="width: 600px;height: 300px;"
-                      onchange="countChar()" onkeyup="countChar()" ></textarea><br/>
-        <input type="text" id="count_char" value="0" readonly="readonly" />
+                      onchange="countChar()" onkeyup="countChar()" maxlength="500"></textarea><br/>
+        <input name="symbols" type="text" id="count_char" value="0" readonly="readonly" />
         <input type="checkbox" id="is_probel" onchange="countChar()" />
         <label for="is_probel">Сколько символов без пробелов</label>
         <div>Символов осталось: <span  id="price_out">0</span></div>
@@ -42,23 +36,25 @@
     <br>
     <input type="submit" value="Создать новый пост">
 </form>
-<div class="dropdown" style="position: absolute; top: 30px; left: 60px">
-    <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Меню
-        <span class="caret"></span>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="btn-group" style="position: absolute; top: 30px; left: 60px">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Меню
     </button>
-    <ul class="dropdown-menu">
-        <li><a href="/news">Новости</a> </li>
-        <li><a href="/settings">Редактировать профиль</a> </li>
-        <li><a href="/upload">Загрузить новое фото профиля</a> </li>
-        <li><a href="/report">Репорт</a></li>
-        <li><a href="/profile">Профиль</a> </li>
-        <li class="divider"></li>
-        <li><a href="/logout">Выйти</a></li>
-    </ul>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/news">Новости</a>
+        <a class="dropdown-item" href="/settings">Редактировать профиль</a>
+        <a class="dropdown-item" href="/upload">Загрузить новое фото профиля</a>
+        <a class="dropdown-item" href="/report">Репорт</a>
+        <a class="dropdown-item" href="/profile">Профиль</a>
+        <a class="dropdown-item" href="/search">Поиск</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/logout">Выйти</a>
+    </div>
 </div>
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
