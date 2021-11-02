@@ -8,7 +8,7 @@
 
 </head>
 <body style="margin: 105px">
-<form action="/reg" method="post">
+<form action="/reg" method="post" name="myForm" onsubmit="return validate()">
   Придумайте себе логин:
   <input name="login" type="text"/>
   <br>
@@ -26,6 +26,45 @@
   <br>
   <input type="submit" value="Регистрация">
 </form>
+
+<script>
+  function validate() {
+    let a = document.forms["myForm"]["login"].value;
+    if (a == "") {
+      alert("Укажите ваш Логин");
+      return false;
+    }
+    let b = document.forms["myForm"]["mail"].value;
+    if (b == "") {
+      alert("Укажите вашу почту");
+      return false;
+    }
+    let с = document.forms["myForm"]["pass"].value;
+    if (с == "") {
+      alert("Укажите ваш пароль");
+      return false;
+    }
+    let d = document.forms["myForm"]["pass2"].value;
+    if (d == "") {
+      alert("Подтвердите ваш пароль");
+      return false;
+    }
+    let e = document.forms["myForm"]["age"].value;
+    if(e == ""){
+      alert("Укажите ваш возраст!")
+      return false
+    }
+    if(e<18){
+      alert("Вы должны быть совершеннолетним для регистрации на сайте")
+      return false
+    }
+    if(document.forms["myForm"]["pass"].value!=document.forms["myForm"]["pass2"].value){
+      alert("Пароли должны совпадать!")
+      return false
+    }
+  }
+</script>
+
 <div class="btn-group" style="position: absolute; top: 30px; left: 60px">
   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Меню

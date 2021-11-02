@@ -87,7 +87,7 @@ public class MessageDaoImpl implements DaoInterface<Message> {
                   preparedStatement.setInt(2, message.getToId());
                   preparedStatement.setLong(3, message.getDate());
                   preparedStatement.setString(4, message.getText());
-                  preparedStatement.setString(4, message.getName());
+                  preparedStatement.setString(5, message.getName());
                   preparedStatement.executeUpdate();
             } catch (SQLException throwables) {
                   LOGGER.warn("Failed to save new report.", throwables);
@@ -100,8 +100,8 @@ public class MessageDaoImpl implements DaoInterface<Message> {
                   String sql = "SELECT * FROM messages WHERE (fromId=?) AND (toId=?);";
                   PreparedStatement preparedStatement = connection.prepareStatement(sql);
                   preparedStatement.setInt(1, id);
-                  preparedStatement.setInt(1, id1);
-                  ResultSet resultSet = statement.executeQuery(sql);
+                  preparedStatement.setInt(2, id1);
+                  ResultSet resultSet = preparedStatement.executeQuery();
 
                   List<Message> messages = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class MessageDaoImpl implements DaoInterface<Message> {
 
                   return messages;
             } catch (SQLException throwables) {
-                  LOGGER.warn("Failed execute getAll query.", throwables);
+                  LOGGER.warn("Failed execute get all messages for chat.", throwables);
                   return new ArrayList<>();
             }
       }

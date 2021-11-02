@@ -8,20 +8,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <#macro content>
-    <form action="/chat" method="post">
-        <div class="input-group mb-3" style="margin: 60px; padding-right: 300px; position: absolute; bottom: 40px">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Тип поиска
-                </button>
-            </div>
-            <input name="text" type="text" class="form-control" placeholder="Введите сообщение"
-                   aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <input type="submit" value="Отправить сообщение">
-            </div>
-        </div>
-    </form>
     <br><br><br>
 <#if messages?has_content>
 <#list messages as message>
@@ -36,7 +22,15 @@
 <#else>
     <p>Нет сообщений</p>
 </#if>
-
+    <form action="/chat" method="post">
+        <div class="input-group mb-3" style="margin: 60px; padding-right: 300px;">
+            <input name="text" type="text" class="form-control" placeholder="Введите сообщение"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <input type="submit" value="Отправить сообщение">
+            </div>
+        </div>
+    </form>
     <div class="btn-group" style="position: absolute; top: 30px; left: 60px;">
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Меню
