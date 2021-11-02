@@ -35,7 +35,7 @@ public class MessageDaoImpl implements DaoInterface<Message> {
                         long date = resultSet.getLong("date");
                         String text = resultSet.getString("text");
                         String name = resultSet.getString("name");
-                        message = new Message(text, fromId, toId, date, name);
+                        message = new Message(id, text, fromId, toId, date, name);
                   }
 
             } catch (SQLException throwables) {
@@ -46,31 +46,7 @@ public class MessageDaoImpl implements DaoInterface<Message> {
 
       @Override
       public Message get(String login) {
-            User user = userService.get(login);
-            Message message = null;
-
-            try {
-                  String sqlRequest = "SELECT * FROM messages WHERE (fromId = ?) OR (toId=?);";
-                  PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest);
-                  preparedStatement.setInt(1, user.getId());
-                  preparedStatement.setInt(1, user.getId());
-                  ResultSet resultSet = preparedStatement.executeQuery();
-                  if (resultSet == null) {
-                        return null;
-                  }
-                  while (resultSet.next()) {
-                        int fromId = resultSet.getInt("fromId");
-                        int toId = resultSet.getInt("toId");
-                        long date = resultSet.getLong("date");
-                        String text = resultSet.getString("text");
-                        String name = resultSet.getString("name");
-                        message = new Message(text, fromId, toId, date, name);
-                  }
-
-            } catch (SQLException throwables) {
-                  LOGGER.warn("Failed to get report by ID");
-            }
-            return message;
+            return null;
       }
 
       @Override

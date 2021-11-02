@@ -32,7 +32,7 @@
         <#list comments as comment>
     <div class="card w-50" style="background: bisque">
         <div class="card-body">
-            <a href="/profile?id=${comment.id}" class="card-title">Профиль пользователя</a>
+            <a href="/profile?id=${comment.userId}" class="card-title">Профиль пользователя</a>
             <p class="card-text">${comment.text}</p>
         </div>
     </div>

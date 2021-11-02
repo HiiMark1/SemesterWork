@@ -8,86 +8,35 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <#macro content>
-<#if (u)??>
-    <#if (u.name)??>
-        ${u.name}
-    </#if>
-    <#if (u.surname)??>
-        ${u.surname}
-    </#if>
-<br>
-    <#if (u.age)??>
-        Возраст:
-        ${u.age}
-    </#if>
-<br>
-    <#if (u.status)??>
-        Статус:
-        ${u.status}
-    </#if>
-<br>
-    <#if (user)??>
-    <button>
-        <a href="/chat?id=${u.id}">Чат</a>
-    </button>
-    </#if>
-<#if (u.imageUri)??>
-    <div style="position: absolute; top: 70px; right: 70px">
-        ${u.imageUri}
+    <form action="/chat" method="post">
+        <div class="input-group mb-3" style="margin: 60px; padding-right: 300px; position: absolute; bottom: 40px">
+            <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Тип поиска
+                </button>
+            </div>
+            <input name="text" type="text" class="form-control" placeholder="Введите сообщение"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <input type="submit" value="Отправить сообщение">
+            </div>
+        </div>
+    </form>
+    <br><br><br>
+<#if messages?has_content>
+<#list messages as message>
+    <div class="card w-50" style="background: darkgrey">
+        <div class="card-body">
+            <h4 class="card-title">${message.name}</h4>
+            <p class="card-text">${message.text}</p>
+        </div>
     </div>
-</#if>
+<br><br>
+</#list>
 <#else>
-    <#if (user.name)??>
-        ${user.name}
-    </#if>
-    <#if (user.surname)??>
-        ${user.surname}
-    </#if>
-<br>
-    <#if (user.age)??>
-        Возраст:
-        ${user.age}
-    </#if>
-<br>
-    <#if (user.status)??>
-        Статус:
-        ${user.status}
-    </#if>
-<br>
-<#if (user.imageUri)??>
-    <div style="position: absolute; top: 70px; right: 70px">
-        ${user.imageUri}
-    </div>
+    <p>Нет сообщений</p>
 </#if>
-</#if>
-    <br>
-    <br>
-    <br>
-<#if (u.id)??>
-<#if u.id==user.id>
-    <form action="/upload">
-        <button>Установить новое фото профиля</button>
-    </form>
-    <form action="/settings">
-        <button>Редактировать</button>
-    </form>
-<br>
-    <form action="/logout">
-        <button>Выйти</button>
-    </form>
-</#if>
-<#else>
-    <form action="/upload">
-        <button>Установить новое фото профиля</button>
-    </form>
-    <form action="/settings">
-        <button>Редактировать</button>
-    </form>
-<br>
-    <form action="/logout">
-        <button>Выйти</button>
-    </form>
-</#if>
+
     <div class="btn-group" style="position: absolute; top: 30px; left: 60px;">
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Меню
