@@ -3,7 +3,7 @@ package com.example.demo.modelDTO;
 public class PostDTO {
       private int id;
       private int userId;
-      private long date;
+      private String date;
       private int rating;
       //500
       private String text;
@@ -11,7 +11,7 @@ public class PostDTO {
       //30
       private String name;
 
-      public PostDTO(int id, int userId, long date, int rating, String text, String picUrl, String name) {
+      public PostDTO(int id, int userId, String date, int rating, String text, String picUrl, String name) {
             this.id = id;
             this.userId = userId;
             this.date = date;
@@ -37,11 +37,11 @@ public class PostDTO {
             this.userId = userId;
       }
 
-      public long getDate() {
+      public String getDate() {
             return date;
       }
 
-      public void setDate(long date) {
+      public void setDate(String date) {
             this.date = date;
       }
 

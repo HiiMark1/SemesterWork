@@ -22,6 +22,6 @@ public class NewsServlet extends HttpServlet {
                   req.setAttribute("user", userService.get(login));
             }
             req.setAttribute("news", postService.getLastTenPosts());
-            req.getRequestDispatcher("news.jsp").forward(req, resp);
+            req.getRequestDispatcher("news.ftl").forward(req, resp);
       }
 }

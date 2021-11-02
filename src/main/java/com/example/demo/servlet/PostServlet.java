@@ -41,7 +41,7 @@ public class PostServlet extends HttpServlet {
                               req.setAttribute("user", userService.get(login));
                         }
                         req.setAttribute("comments", commentService.getPostComments(id));
-                        req.getRequestDispatcher("post.jsp").forward(req, resp);
+                        req.getRequestDispatcher("post.ftl").forward(req, resp);
                   }
             } else {
                   resp.sendRedirect("/news");

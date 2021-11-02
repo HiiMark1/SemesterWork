@@ -1,51 +1,58 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.demo.model.Post" %>
-<%@ page import="com.example.demo.model.User" %>
-<%@ page import="java.util.Date" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<#ftl encoding='UTF-8'>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Поиск</title>
+    <meta charset="UTF-8">
+    <title>Пост</title>
 </head>
-<body>
+<body style="margin: 100px">
 <br><br><br><br><br><br><br><br><br><br>
-<%
-    if (request.getAttribute("result")!=null && request.getAttribute("result").equals("1")) {
-        String type = (String) request.getAttribute("type");
-        if (type != null) {
-            if (type.equals("posts")) {
-                List<Post> posts = (List<Post>) request.getAttribute("posts");
-                for (Post post : posts) {
-                    out.println("<div class=\"card w-75\" style=\"background: bisque; margin-left:80px; margin-top:60px\">");
-                    out.println("<div class=\"card-body\">");
-                    out.println("<h4 class=\"card-title\">" + post.getName() + "</h4>");
-                    out.println("<p class=\"card-text\">" + post.getText() + "</p>");
-                    out.println("<p class=\"card-footer\">" + new Date(post.getDate()) + "</p>");
-                    out.println("<a href=\"/post?id=" + post.getId() + "\">" + "Перейти к посту" + "</a>");
-                    out.println("</div></div><br><br>");
-                }
-            } else {
-                List<User> users = (List<User>) request.getAttribute("users");
-                for (User user: users) {
-                    out.println("<div class=\"card w-75\" style=\"background: bisque; margin-left:80px; margin-top:60px\">");
-                    out.println("<div class=\"card-body\">");
-                    out.println("<h4 class=\"card-title\">" + user.getLogin() + "</h4>");
-                    out.println("<p class=\"card-text\">" + user.getName() + " " + user.getSurname() + "</p>");
-                    out.println("<p class=\"card-footer\">" + user.getStatus() + "</p>");
-                    out.println("<a href=\"/profile?id=" + user.getId() + "\">" + "Перейти к профилю" + "</a>");
-                    out.println("</div></div><br><br>");
-                }
-            }
-        }
-    }
-%>
+<#if (result)??>
+    <#if (type)??>
+        <#if (posts)??>
+            <#list posts as post>
+                <div class="card w-75" style="background: bisque; margin-left:80px; margin-top:60px">
+                    <div class="card-body">
+                        <h4 class="card-title">${post.name}</h4>
+                        <p class="card-text">${post.text}</p>
+                        <#--        <p class="card-footer">${post.date}</p>-->
+                        <a href="/post?id=${post.id}">Перейти к посту</a>
+                    </div>
+                </div>
+                <br><br>
+            </#list>
+        </#if>
+    </#if>
+
+    <#if (users)??>
+        <#list users as user>
+            <div class="card w-75" style="background: bisque; margin-left:80px; margin-top:60px">
+                <div class="card-body">
+                    <h4 class="card-title">${user.login}</h4>
+                    <p class="card-text">
+                        <#if (user.name)??>
+                            ${user.name}
+                        </#if>
+                        <#if (user.surname)??>
+                            ${user.surname}
+                        </#if>
+                    </p>
+                    <p class="card-footer">
+                        <#if (user.status)??>
+                            ${user.status}
+                        </#if>
+                    </p>
+                    <a href="/profile?id=${user.id}">Перейти к профилю</a>
+                </div>
+            </div>
+            <br><br>
+        </#list>
+
+    </#if>
+</#if>
+
 <form action="/search" method="post">
-    <div class="input-group mb-3" style="margin: 60px; padding: 100px; position: absolute; top: 40px">
+    <div class="input-group mb-3" style="margin: 60px; padding-right: 300px; position: absolute; top: 40px">
         <div class="input-group-prepend">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Тип поиска
@@ -74,8 +81,12 @@
         </div>
     </div>
 </form>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div class="btn-group" style="position: absolute; top: 30px; left: 60px">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
         Меню
     </button>
     <div class="dropdown-menu">

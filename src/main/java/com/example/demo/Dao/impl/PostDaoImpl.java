@@ -30,7 +30,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
                   }
                   while (resultSet.next()) {
                         int userId = resultSet.getInt("userId");
-                        long date = resultSet.getLong("date");
+                        String date = resultSet.getString("date");
                         int rating = resultSet.getInt("rating");
                         String text = resultSet.getString("text");
                         String picUrl = resultSet.getString("picUrl");
@@ -63,7 +63,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
                         Post post = new Post(
                                 resultSet.getInt("id"),
                                 resultSet.getInt("userId"),
-                                resultSet.getLong("date"),
+                                resultSet.getString("date"),
                                 resultSet.getInt("rating"),
                                 resultSet.getString("text"),
                                 resultSet.getString("picUrl"),
@@ -86,7 +86,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
             try {
                   PreparedStatement preparedStatement = connection.prepareStatement(sql);
                   preparedStatement.setInt(1, post.getUserId());
-                  preparedStatement.setLong(2, post.getDate());
+                  preparedStatement.setString(2, post.getDate());
                   preparedStatement.setInt(3, post.getRating());
                   preparedStatement.setString(4, post.getText());
                   preparedStatement.setString(5, post.getPicUrl());
@@ -159,7 +159,7 @@ public class PostDaoImpl implements DaoInterface<Post> {
                   while (resultSet.next()) {
                         int id = resultSet.getInt("id");
                         int userId = resultSet.getInt("userId");
-                        long date = resultSet.getLong("date");
+                        String date = resultSet.getString("date");
                         int rating = resultSet.getInt("rating");
                         String text = resultSet.getString("text");
                         String picUrl = resultSet.getString("picUrl");

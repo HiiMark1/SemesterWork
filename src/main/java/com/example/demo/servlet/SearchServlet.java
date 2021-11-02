@@ -21,7 +21,7 @@ public class SearchServlet extends HttpServlet {
 
       @Override
       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("search.jsp").forward(req, resp);
+            req.getRequestDispatcher("search.ftl").forward(req, resp);
       }
 
       @Override
@@ -32,7 +32,7 @@ public class SearchServlet extends HttpServlet {
                   String q = req.getParameter("text");
                   if (type != null && q != null) {
                         if (type.equals("posts")) {
-                              req.setAttribute("type", "posts");
+                              req.setAttribute("type", 1);
                               List<Post> posts1 = postService.getAll();
                               String[] str = q.split("\\+");
                               List<Post> posts = new ArrayList<>();
@@ -44,10 +44,11 @@ public class SearchServlet extends HttpServlet {
                                           }
                                     }
                               }
+                              req.setAttribute("users", null);
                               req.setAttribute("posts", posts);
-                              req.getRequestDispatcher("search.jsp").forward(req, resp);
+                              req.getRequestDispatcher("search.ftl").forward(req, resp);
                         } else {
-                              req.setAttribute("type", "users");
+                              req.setAttribute("type", 2);
                               List<User> posts1 = userService.getAll();
                               String[] str = q.split("\\+");
                               List<User> users = new ArrayList<>();
@@ -61,8 +62,9 @@ public class SearchServlet extends HttpServlet {
                                           }
                                     }
                               }
+                              req.setAttribute("posts", null);
                               req.setAttribute("users", users);
-                              req.getRequestDispatcher("search.jsp").forward(req, resp);
+                              req.getRequestDispatcher("search.ftl").forward(req, resp);
                         }
                   }
             } else {

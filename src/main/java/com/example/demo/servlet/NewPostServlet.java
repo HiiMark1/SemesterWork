@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet(name = "newPostServlet", urlPatterns = "/new_post")
@@ -52,7 +53,10 @@ public class NewPostServlet extends HttpServlet {
                     && !req.getParameter("name").equals("") && req.getParameter("text") != null) {
                   String text = req.getParameter("text");
                   String name = req.getParameter("name");
-                  Post post = new Post(user.getId(), new Date().getTime(), 0, text, "", name);
+                  SimpleDateFormat out = new SimpleDateFormat("dd-MM-yy");
+                  String newDate = out.format(new Date());
+                  System.out.println(newDate);
+                  Post post = new Post(user.getId(), newDate, 0, text, "", name);
                   postService.save(post);
                   resp.sendRedirect("/news");
             } else {

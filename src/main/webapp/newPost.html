@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:jsp="http://java.sun.com/jsf/html">
+<html lang="ru" xmlns:jsp="http://java.sun.com/jsf/html">
 <head style="margin: 130px">
     <meta charset="UTF-8">
     <title>Новый пост</title>
@@ -14,14 +14,14 @@
             var is_probel = document.getElementById("is_probel");
             var count_char = document.getElementById("count_char");
             var count_char_textarea = document.getElementById("count_char_textarea");
-            var price_out = document.getElementById("price_out");
+            var q = document.getElementById("q");
             if (is_probel.checked != false) {
                 count_char.value = count_char_textarea.value.replace(/ *n*r*t*/g, "").length;
             }
             else {
                 count_char.value = count_char_textarea.value.length;
             }
-            price_out.innerHTML = 500 - parseInt(count_char.value);
+            q.innerHTML = 500 - parseInt(count_char.value = count_char_textarea.value.length);
         }
 
     </script>
@@ -31,7 +31,7 @@
         <input name="symbols" type="text" id="count_char" value="0" readonly="readonly" />
         <input type="checkbox" id="is_probel" onchange="countChar()" />
         <label for="is_probel">Сколько символов без пробелов</label>
-        <div>Символов осталось: <span  id="price_out">0</span></div>
+        <div>Символов осталось: <span  id="q">0</span></div>
     </div>
     <br>
     <input type="submit" value="Создать новый пост">

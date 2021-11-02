@@ -31,7 +31,7 @@
             ${user.status}
         </#if>
         <br>
-        <input name="status" type="text" style="width: auto;">
+        <input name="status" type="text" style="width: auto;" maxlength="700">
         <br>
         <br>
         Для смены пароля введите старый и новый пароли
