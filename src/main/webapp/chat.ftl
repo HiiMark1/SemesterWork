@@ -9,6 +9,16 @@
 
 <#macro content>
     <br><br><br>
+    <form action="/chat" method="post">
+        <div class="input-group input-group-sm mb-3" style="margin: 60px; padding-right: 300px;">
+            <input name="text" type="text" class="form-control" placeholder="Введите сообщение"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <input type="submit" value="Отправить сообщение">
+            </div>
+        </div>
+    </form>
+    <br><br>
 <#if messages?has_content>
 <#list messages as message>
     <div class="card w-50" style="background: darkgrey">
@@ -22,15 +32,6 @@
 <#else>
     <p>Нет сообщений</p>
 </#if>
-    <form action="/chat" method="post">
-        <div class="input-group mb-3" style="margin: 60px; padding-right: 300px;">
-            <input name="text" type="text" class="form-control" placeholder="Введите сообщение"
-                   aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <input type="submit" value="Отправить сообщение">
-            </div>
-        </div>
-    </form>
     <div class="btn-group" style="position: absolute; top: 30px; left: 60px;">
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Меню

@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "chatServlet", urlPatterns = "/chat")
 public class ChatServlet extends HttpServlet {
@@ -56,8 +58,9 @@ public class ChatServlet extends HttpServlet {
                                                 id1 = user.getId();
                                                 id2 = u.getId();
                                           }
-                                          req.setAttribute("messages", messagesService.getAllMessagesForUsers(id1,id2));
-                                          System.out.println("500");
+                                          List<Message> messageList = messagesService.getAllMessagesForUsers(id1,id2);
+                                          Collections.reverse(messageList);
+                                          req.setAttribute("messages", messageList);
                                           req.getRequestDispatcher("chat.ftl").forward(req, resp);
                                     }
                               } else {
@@ -82,8 +85,9 @@ public class ChatServlet extends HttpServlet {
                                           id1 = user.getId();
                                           id2 = u.getId();
                                     }
-                                    req.setAttribute("messages", messagesService.getAllMessagesForUsers(id1,id2));
-                                    System.out.println("800");
+                                    List<Message> messageList = messagesService.getAllMessagesForUsers(id1,id2);
+                                    Collections.reverse(messageList);
+                                    req.setAttribute("messages", messageList);
                                     req.getRequestDispatcher("chat.ftl").forward(req, resp);
                               }
                         } else {
