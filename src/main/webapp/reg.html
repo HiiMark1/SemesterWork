@@ -10,51 +10,26 @@
 <body style="margin: 105px">
 <form action="/reg" method="post" name="myForm" onsubmit="return validate()">
   Придумайте себе логин:
-  <input name="login" type="text"/>
+  <input name="login" type="text" minlength="6" maxlength="20" placeholder="login" required/>
   <br>
   Адресс электронной почты:
-  <input name="mail" type="email"/>
+  <input name="mail" type="email" placeholder="email" required/>
   <br>
   Придумайте себе пароль:
-  <input name="pass" type="password">
+  <input name="pass" type="password" minlength="6" maxlength="20" placeholder="password" required>
   <br>
   Подтвердите ваш пароль:
-  <input name='pass2' type="password">
+  <input name='pass2' type="password" minlength="6" maxlength="20" placeholder="password" required>
   <br>
   Сколько вам лет ?
-  <input name="age" type="text" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">
+  <input name="age" type="text" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" placeholder="age" required>
   <br>
   <input type="submit" value="Регистрация">
 </form>
 
 <script>
   function validate() {
-    let a = document.forms["myForm"]["login"].value;
-    if (a == "") {
-      alert("Укажите ваш Логин");
-      return false;
-    }
-    let b = document.forms["myForm"]["mail"].value;
-    if (b == "") {
-      alert("Укажите вашу почту");
-      return false;
-    }
-    let с = document.forms["myForm"]["pass"].value;
-    if (с == "") {
-      alert("Укажите ваш пароль");
-      return false;
-    }
-    let d = document.forms["myForm"]["pass2"].value;
-    if (d == "") {
-      alert("Подтвердите ваш пароль");
-      return false;
-    }
-    let e = document.forms["myForm"]["age"].value;
-    if(e == ""){
-      alert("Укажите ваш возраст!")
-      return false
-    }
-    if(e<18){
+    if(document.forms["myForm"]["age"].value<18){
       alert("Вы должны быть совершеннолетним для регистрации на сайте")
       return false
     }

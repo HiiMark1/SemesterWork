@@ -24,23 +24,24 @@ public class LoginServlet extends HttpServlet {
             String password = req.getParameter("pass");
             if(login == null || password == null || login.equals("") || password.equals("")){
                   resp.sendRedirect("/login");
-            }
-            User user = userService.get(login);
-            if(user == null){
-                  resp.sendRedirect("/login");
             } else {
-                  if (user.getPassword().equals(PasswordHelper.encrypt(password))) {
-                        HttpSession session = req.getSession();
-                        session.setAttribute("login", login);
-                        session.setMaxInactiveInterval(2*60*60);
-                        if(req.getParameter("remember")!=null && (req.getParameter("remember").equals("rem"))){
-                              Cookie userCookie = new Cookie("login", login);
-                              userCookie.setMaxAge(7*24*60*60);
-                              resp.addCookie(userCookie);
-                        }
-                        resp.sendRedirect("/profile");
-                  } else {
+                  User user = userService.get(login);
+                  if(user == null){
                         resp.sendRedirect("/login");
+                  } else {
+                        if (user.getPassword().equals(PasswordHelper.encrypt(password))) {
+                              HttpSession session = req.getSession();
+                              session.setAttribute("login", login);
+                              session.setMaxInactiveInterval(2*60*60);
+                              if(req.getParameter("remember")!=null && (req.getParameter("remember").equals("rem"))){
+                                    Cookie userCookie = new Cookie("login", login);
+                                    userCookie.setMaxAge(7*24*60*60);
+                                    resp.addCookie(userCookie);
+                              }
+                              resp.sendRedirect("/profile");
+                        } else {
+                              resp.sendRedirect("/login");
+                        }
                   }
             }
       }

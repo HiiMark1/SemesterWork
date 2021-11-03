@@ -8,17 +8,31 @@
 
 </head>
 <body style="margin: 105px">
-<form action="/login" method="post">
+<form action="/login" method="post" name="loginForm" onsubmit="return validate();">
     Логин:
-    <input name="login" type="text"/>
+    <input name="login" type="text" minlength="6" maxlength="20" placeholder="login" required />
     <br>
     Пароль:
-    <input name="pass" type="password">
+    <input name="pass" type="password" minlength="6" maxlength="20" placeholder="password" required>
     <br>
-    <input type="checkbox" name="remember" value="rem">Запомнить меня
+    <input type="checkbox" name="remember" value="rem" >Запомнить меня
     <br>
     <input type="submit" value="Войти">
 </form>
+<script>
+    function validate() {
+        let a = document.forms["loginForm"]["login"].value;
+        if (a == "") {
+            alert("Укажите ваш Логин");
+            return false;
+        }
+        let b = document.forms["loginForm"]["pass"].value;
+        if (b == "") {
+            alert("Укажите ваш пароль");
+            return false;
+        }
+    }
+</script>
 <div class="btn-group" style="position: absolute; top: 30px; left: 60px">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Меню

@@ -19,13 +19,16 @@
     <br><br>
     <hr align="center" width="max-content" size="2px" color="colar"/>
     <br>
-    <form action="/post" method="post">
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Оставить комментарий</label>
-            <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="500"></textarea>
-        </div>
-        <input type="submit" value="Отправить">
-    </form>
+    <#if (user)??>
+        <form action="/post" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Оставить комментарий</label>
+                <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="500"></textarea>
+            </div>
+            <input type="submit" value="Отправить">
+        </form>
+        <#else>
+    </#if>
     <br><br>
     <h2>Комментарии</h2><br><br>
     <#if comments?has_content>
