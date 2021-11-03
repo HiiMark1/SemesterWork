@@ -17,7 +17,7 @@
             ${user.surname}
         </#if>
         <br>
-        <input name="surname" type="text" class="surname field">
+        <input name="surname" type="text" class="surname field" onkeyup="this.value = this.value.replace(/[^a-zA-ZА-Яа-я()]/g,'');">
         <br>
         Возраст:
         <#if (user.age)??>
